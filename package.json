@@ -1,0 +1,19 @@
+{
+  "name": "css-azure-app-service",
+  "version": "0.0.1",
+  "description": "Run the Community Solid Server in an Azure App Service",
+  "repository": "git@github.com:matthieubosquet/css-azure-app-service.git",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "start": "community-solid-server --config config.json --rootFilePath /csstest --mainModulePath . --loggingLevel info --port $PORT",
+    "start:dev": "community-solid-server --config config.json --rootFilePath data/ --mainModulePath . --loggingLevel info --port 8080"
+  },
+  "files": [
+    "config"
+  ],
+  "dependencies": {
+    "@solid/community-server": "^8.0.0-alpha.1"
+  },
+  "license": "MIT"
+}
