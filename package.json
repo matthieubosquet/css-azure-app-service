@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "npm i && community-solid-server --config config.json --baseUrl \"https://csstestnode-dhf6hxapfcbrdxem.uksouth-01.azurewebsites.net/\" --rootFilePath /csstest --mainModulePath . --loggingLevel info --port $PORT",
+    "start": "community-solid-server --config config.json --baseUrl \"https://csstestnode-dhf6hxapfcbrdxem.uksouth-01.azurewebsites.net/\" --rootFilePath /csstest --mainModulePath . --loggingLevel info --port $PORT",
     "start:dev": "community-solid-server --config config.json --rootFilePath data/ --mainModulePath . --loggingLevel info --port 8080"
   },
   "files": [
