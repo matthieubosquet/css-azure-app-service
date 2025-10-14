@@ -7,7 +7,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "start": "community-solid-server --config config.json --baseUrl \"https://csstestnode-dhf6hxapfcbrdxem.uksouth-01.azurewebsites.net/\" --rootFilePath /csstest --mainModulePath . --loggingLevel info --port $PORT",
-    "start:dev": "community-solid-server --config config.json --rootFilePath data/ --mainModulePath . --loggingLevel info --port 8080"
+    "start:dev": "community-solid-server --config config.json --rootFilePath data/ --mainModulePath . --loggingLevel info --port 8080",
+    "prepare": "npm i"
   },
   "files": [
     "config.json"
