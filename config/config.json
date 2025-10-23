@@ -70,7 +70,7 @@
       "overrideInstance": { "@id": "urn:solid-server:default:ResourceLocker" },
       "overrideParameters": {
         "@type": "WrappedExpiringReadWriteLocker",
-        "expiration": 60000
+        "expiration": 6000
       }
     },
     {
