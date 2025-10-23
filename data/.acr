@@ -1,0 +1,20 @@
+@prefix acl: <http://www.w3.org/ns/auth/acl#>.
+@prefix acp: <http://www.w3.org/ns/solid/acp#>.
+
+# Give all agents Read, Write, and Control permissions on everything
+<#card>
+    a acp:AccessControlResource;
+    acp:resource <./>;
+    acp:accessControl <#publicAccess>;
+    acp:memberAccessControl <#publicAccess> .
+
+<#publicAccess>
+    a acp:AccessControl;
+    acp:apply [
+        a acp:Policy;
+        acp:allow acl:Read, acl:Write, acl:Control;
+        acp:anyOf [
+            a acp:Matcher;
+            acp:agent acp:PublicAgent
+        ]
+    ].
