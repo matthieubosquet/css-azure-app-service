@@ -43,7 +43,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'csstestnode'
+          app-name: 'css'
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E84B87FC8ACF456B90EBF40494B68004 }}
