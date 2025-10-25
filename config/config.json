@@ -64,7 +64,7 @@
       ]
     },
     {
-      "comment": "Long time for resource lock expiry to accomodate network delays.",
+      "comment": "Adjust resource lock expiry to accomodate network latency.",
       "@id": "urn:css:config:util:resource-locker:file:override_expiration",
       "@type": "Override",
       "overrideInstance": { "@id": "urn:solid-server:default:ResourceLocker" },
