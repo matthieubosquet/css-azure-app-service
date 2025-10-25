@@ -6,7 +6,7 @@
   "type": "module",
   "main": "./index.js",
   "scripts": {
-    "start": "node . --config ./config/config.json --baseUrl \"https://$WEBSITE_HOSTNAME\" --rootFilePath /csstest --mainModulePath . --loggingLevel info --port $PORT",
+    "start": "node . --config ./config/config.json --baseUrl \"https://$WEBSITE_HOSTNAME\" --rootFilePath /data --mainModulePath . --loggingLevel info --port $PORT",
     "start:dev": "node . --config ./config/config.json --rootFilePath data/ --mainModulePath . --loggingLevel info --port 8080"
   },
   "files": [
