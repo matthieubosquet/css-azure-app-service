@@ -6,16 +6,20 @@
             "defaultValue": "[resourceGroup().location]",
             "type": "string"
         },
+        "deployment_time": {
+            "defaultValue": "[utcNow('yyyyMMddHHmmss')]",
+            "type": "string"
+        },
         "app_service_plan_name": {
-            "defaultValue": "[concat(utcNow('yyyyMMddHHmmss'), 'plan')]",
+            "defaultValue": "[concat(parameters('deployment_time'), 'plan')]",
             "type": "string"
         },
         "app_service_name": {
-            "defaultValue": "[concat(utcNow('yyyyMMddHHmmss'), 'app')]",
+            "defaultValue": "[concat(parameters('deployment_time'), 'app')]",
             "type": "string"
         },
         "storage_account_name": {
-            "defaultValue": "[concat(utcNow('yyyyMMddHHmmss'), 'blob')]",
+            "defaultValue": "[concat(parameters('deployment_time'), 'blob')]",
             "type": "string"
         },
         "file_share_name": {
@@ -349,19 +353,6 @@
                 "start_time": "2025-10-24T09:43:03.8979942Z",
                 "end_time": "2025-10-24T09:43:40.0285522Z",
                 "active": true
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "apiVersion": "2024-11-01",
-            "name": "[concat(parameters('app_service_name'), '/', parameters('app_service_name'), '-bvh5hqh9g6g9anhx.uksouth-01.azurewebsites.net')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('app_service_name'))]"
-            ],
-            "properties": {
-                "siteName": "css",
-                "hostNameType": "Verified"
             }
         },
         {

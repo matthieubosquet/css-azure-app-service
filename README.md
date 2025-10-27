@@ -2,54 +2,71 @@
 
 ## Pre-requisite
 
-```bash
-brew update && brew install azure-cli
+An [Azure Subscription](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account).
+
+
+## Deploy infrastructure from CLI
+
+You can deploy a minimal infrastructure to host the CSS using the Azure CLI and the arm template in `./infrastructure/template.json` ([install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)).
+
+You'll need to choose a [resource group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups) name and a [location](https://learn.microsoft.com/en-us/azure/reliability/regions-list#azure-regions-list-1).
+
+```zsh
+CSS_INFRASTRUCTURE_RESOURCE_GROUP_NAME=css
+CSS_INFRASTRUCTURE_LOCATION="UK South"
 ```
 
+To keep track of the app service name which is useful for retrieving its publish profile and setting up the GiHub Action secrets, you can set a deployment time:
 
-An existing [App Service on Linux app](https://learn.microsoft.com/en-us/azure/app-service/).
-An Azure Storage account.
-An Azure file share and directory.
+```zsh
+CSS_INFRASTRUCTURE_DEPLOYMENT_TIME=$(date '+%Y%m%d%H%M%S')
+```
 
+Then login (and select the desired Azure Subscription), create the resource group if it doesn't exist and deploy the arm template.
 
-## Deploy ARM Template from local
-
-
-
-```bash
+```zsh
 az login
 
-az group create --name 182764JH --location "UK South"
+az group create --name $CSS_INFRASTRUCTURE_RESOURCE_GROUP_NAME --location $CSS_INFRASTRUCTURE_LOCATION
 
-az deployment group create --resource-group <resource-group-name> --template-file <path-to-template>
-
-az deployment group create --resource-group 182764JH --template-file ./infrastructure/template.json
-
-
-
-
-
-az deployment sub create --location <location> --template-file <path-to-template>
-
-az deployment sub create --location "UK South" --template-file ./infrastructure/template.json
-
-
-
+az deployment group create --resource-group $CSS_INFRASTRUCTURE_RESOURCE_GROUP_NAME --template-file ./infrastructure/template.json --parameters deployment_time=$CSS_INFRASTRUCTURE_DEPLOYMENT_TIME
 ```
 
-GitHub action authenticate for ARM Template deploy.
+
+## Deploy CSS in an existing App service using a GitHub action
+
+You'll need a copy of this repository with two [actions secrets set](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets): `AZUREAPPSERVICE_NAME` & `AZUREAPPSERVICE_PUBLISHPROFILE`.
+
+The app service name is the one you set deploying the infrastructure:
+
+```zsh
+echo ${CSS_INFRASTRUCTURE_DEPLOYMENT_TIME}app
+```
+
+Retrieve the app service's Publish Profile:
+
+```zsh
+az webapp deployment list-publishing-profiles --resource-group $CSS_INFRASTRUCTURE_RESOURCE_GROUP_NAME --name ${CSS_INFRASTRUCTURE_DEPLOYMENT_TIME}app --xml
+```
+
+Then just trigger the Deploy CSS action from GitHub.
+
+See also: [Deploy Node.js to Azure App Services](https://docs.github.com/en/actions/how-tos/deploy/deploy-to-third-party-platforms/nodejs-to-azure-app-service).
 
 
-## Setup CI
+## Setting up CSS
 
-App Service > Configuration > General settings > SCM Basic Auth Publishing > ON
+This repository is setup to run CSS with bare minimum Solid standard functionality using [ACP](https://solidproject.org/TR/acp) for authorization.
 
-App Service > Overview > Download publish profile
+Considering you will start from an empty Azure blob storage, in its initial state, CSS will find no authorization and all requests will return a `401` Unauthorized HTTP Error.
 
-Github > settings > Secrets and variables > Actions > set
+You can bootstrap your environment by uploading the adequate access control policies and creating the default folder and resource structure in your Azure Blob storage file share.
 
-AZUREAPPSERVICE_PUBLISHPROFILE
+For example, you could upload `data/.acr` to make the Solid server fully open to everyone (Read, Write, Control) and then let your app bootstrap permissions.
 
-Set
 
-AZUREAPPSERVICE_NAME (using template name)
+## Note
+
+The first boot of the CSS will take a little time (about 3 minutes). If you choose a [paid App Service Plan](https://azure.microsoft.com/en-gb/pricing/details/app-service/linux/), your CSS instance could always be on and not have to go through booting time often.
+
+Currently, the App Service Free Plan is limited to 60 CPU minutes / day.
