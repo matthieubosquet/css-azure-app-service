@@ -7,7 +7,7 @@ An [Azure Subscription](https://azure.microsoft.com/en-us/pricing/purchase-optio
 
 ## Deploy infrastructure from CLI
 
-You can deploy a minimal infrastructure to host the CSS using the Azure CLI and the arm template in `./infrastructure/template.json` ([install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)).
+You can deploy a minimal infrastructure to host the CSS using the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) and the arm template in `./infrastructure/template.json` ([install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)).
 
 You'll need to choose a [resource group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups) name and a [location](https://learn.microsoft.com/en-us/azure/reliability/regions-list#azure-regions-list-1).
 
@@ -37,6 +37,8 @@ az deployment group create --resource-group $CSS_INFRASTRUCTURE_RESOURCE_GROUP_N
 
 You'll need a copy of this repository with two [actions secrets set](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets): `AZUREAPPSERVICE_NAME` & `AZUREAPPSERVICE_PUBLISHPROFILE`.
 
+You can use the [GitHub CLI](https://cli.github.com/manual/) to set secrets and trigger the workflow ([install GitHub CLI](https://cli.github.com/)).
+
 The app service name is the one you set deploying the infrastructure:
 
 ```zsh
@@ -47,6 +49,10 @@ Retrieve the app service's Publish Profile:
 
 ```zsh
 az webapp deployment list-publishing-profiles --resource-group $CSS_INFRASTRUCTURE_RESOURCE_GROUP_NAME --name ${CSS_INFRASTRUCTURE_DEPLOYMENT_TIME}app --xml
+```
+
+```zsh
+gh auth login
 ```
 
 Then just trigger the Deploy CSS action from GitHub.
