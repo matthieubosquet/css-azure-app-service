@@ -79,3 +79,11 @@ Currently, the App Service Free Plan is limited to 60 CPU minutes / day.
 ## Acknowledgements
 
 A huge thanks goes to imec research groups at Ghent University for the [development of the Community Solid Server](https://solidlab.be/community-solid-server/).
+
+
+## License
+
+This work is dual-licensed under MIT and Apache 2.0.
+You can choose between one of them if you use this work.
+
+`SPDX-License-Identifier: MIT OR Apache-2.0`
