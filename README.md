@@ -1,5 +1,7 @@
 # Community Solid Server (CSS) in an Azure App Service
 
+This repository is setup to facilitate the deployment of the [Community Solid Server](https://github.com/CommunitySolidServer/CommunitySolidServer) in Azure.
+
 ## Pre-requisite
 
 An [Azure Subscription](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account).
@@ -51,10 +53,6 @@ Retrieve the app service's Publish Profile:
 az webapp deployment list-publishing-profiles --resource-group $CSS_INFRASTRUCTURE_RESOURCE_GROUP_NAME --name ${CSS_INFRASTRUCTURE_DEPLOYMENT_TIME}app --xml
 ```
 
-```zsh
-gh auth login
-```
-
 Then just trigger the Deploy CSS action from GitHub.
 
 See also: [Deploy Node.js to Azure App Services](https://docs.github.com/en/actions/how-tos/deploy/deploy-to-third-party-platforms/nodejs-to-azure-app-service).
@@ -76,3 +74,8 @@ For example, you could upload `data/.acr` to make the Solid server fully open to
 The first boot of the CSS will take a little time (about 3 minutes). If you choose a [paid App Service Plan](https://azure.microsoft.com/en-gb/pricing/details/app-service/linux/), your CSS instance could always be on and not have to go through booting time often.
 
 Currently, the App Service Free Plan is limited to 60 CPU minutes / day.
+
+
+## Acknowledgements
+
+A huge thanks goes to imec research groups at Ghent University for the [development of the Community Solid Server](https://solidlab.be/community-solid-server/).
