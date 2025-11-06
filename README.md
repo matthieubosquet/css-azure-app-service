@@ -1,4 +1,4 @@
-# Community Solid Server (CSS) in an Azure App Service
+# Hosting the Community Solid Server (CSS) in an Azure App Service
 
 This repository is setup to facilitate the deployment of the [Community Solid Server](https://github.com/CommunitySolidServer/CommunitySolidServer) in Azure.
 
